@@ -1,23 +1,16 @@
-/* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
-
-
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
-
-// You should get Auth Token in the Blynk App.
-// Go to the Project Settings (nut icon).
-char auth[] = "74e2e35eeee3446daec133e5af8ca54c";
-
-// Your WiFi credentials.
-// Set password to "" for open networks.
+char auth[] = "1cf112ae166a4939a8193506b19bee6c";
 char ssid[] = "Zuhair";
 char pass[] = "22446688";
 
+
+#define NodeLED = 16 // D0
 ///////////////////////////////////////////////////////////////////////////
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, LOW);  //turn ON
+  
   //  delay(1000);
   //  digitalWrite(LED_BUILTIN, HIGH);
   //  delay(2000);
@@ -30,4 +23,14 @@ void setup() {
 void loop() {
   Blynk.run();
 
+}
+
+BLYNK_WRITE(V2){
+  int pinValue = param.asInt();
+    if (pinValue == 1) {
+    digitalWrite(LED_BUILTIN, LOW);  //turn ON
+  }
+  else if (pinValue == 0) {
+    digitalWrite(LED_BUILTIN, HIGH);  //turn OFF
+  }
 }
